@@ -1,3 +1,10 @@
+/**
+ * YouTube  : https://youtube.com/@am_clubs
+ * Telegram : https://t.me/am_clubs
+ * GitHub   : https://github.com/amclubs
+ * BLog     : https://amclubss.com
+ */
+
 // In the Vercel Dashboard, please use environment variables (process.env); otherwise, the default value will be an empty string.
 let id = 'ec872d8f-72b0-4a04-b612-0327d85e18ed';
 let uuid;
