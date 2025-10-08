@@ -1,7 +1,8 @@
 ### 🚀[am-cf-tunnel-sub](https://github.com/amclubs/am-cf-tunnel-sub)
-基于vercel 部署该脚本，你可以方便地将Cloudflare Workers 和 Pages的 VLESS、Trojan 配置信息使用在线配置转换到 Clash、 Singbox 、Quantumult X等工具中订阅使用。Cloudflare Workers 和 Pages 生成VLESS、Trojan节点,实现一键订阅节点。分离节点与订阅框架,更好解决Cloudfare部署时出现1101、522的问题。 [最新视频教程](https://youtu.be/emEBm8Gw2wI)、[🎬 YouTube](https://youtube.com/@am_clubs?sub_confirmation=1)、 [💬 Telegram](https://t.me/am_clubs)、[📂 GitHub](https://github.com/amclubs)、[🌐 Blog](https://amclubss.com)
+基于vercel 部署该脚本，你可以方便地将Cloudflare Workers 和 Pages的 VLESS、Trojan 配置信息使用在线配置转换到 Clash、 Singbox 、Quantumult X等工具中订阅使用。Cloudflare Workers 和 Pages 生成VLESS、Trojan节点,实现一键订阅节点。分离节点与订阅框架,更好解决Cloudfare部署时出现1101、522的问题。 [最新视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=596s)、[🎬 YouTube](https://youtube.com/@am_clubs?sub_confirmation=1)、 [💬 Telegram](https://t.me/am_clubs)、[📂 GitHub](https://github.com/amclubs)、[🌐 Blog](https://amclubss.com)
 
 ### ⚙️结合loudflare部署免费节点项目与教程使用 [am-cf-tunnel](https://github.com/amclubs/am-cf-tunnel)
+- 本频道订阅器转换地址：https://sub.amclubss.com
 
 ## 📝一、前期准备资料
 <details>
@@ -25,12 +26,12 @@
 </details>
 
 ## 
-## ⚙️ 二、Vercel部署节点订阅器 [视频教程](https://www.youtube.com/watch?v=wgeM9XvZ5RA&t=195s)
+## ⚙️ 二、Vercel部署节点订阅器 [视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=596s)
 <details>
 <summary>点击展开/收起</summary>
 
 1. Fork或克隆本仓库[am-cf-tunnel-sub](https://github.com/amclubs/am-cf-tunnel-sub)到您的 GitHub/GitLab 账户
-2. 登录 [Vercel](https://vercel.com)，点击"New Project"
+2. 登录 [Vercel](https://vercel.com)，点击"New Project" <a href="https://www.youtube.com/watch?v=ZxHLLlxuJyI&t=28s">[点击观看注册视频教程]</a>
 3. 导入您的仓库，使用默认设置
 4. **⚠️ 重要：在"Settings" > "Environment Variables"中添加 `UUID` 和 `HOST` 变量（必须设置）**
 5. 点击"Deploy"
@@ -40,7 +41,7 @@
 </details>
 
 ## 
-## 🔧三、变量说明 [视频教程](https://www.youtube.com/watch?v=ag12Rpc9KP4&t=739s)
+## 🔧三、变量说明 [视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=596s)
 | 变量名 | 示例 | 必填 | 备注 | YT |
 |-----|-----|-----|-----|-----|
 | ID   | ec872d8f-72b0-4a04-b612-0327d85e18ed（默认）|✅| 订阅器的登录密码 | |
