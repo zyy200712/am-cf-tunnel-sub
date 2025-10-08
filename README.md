@@ -4,6 +4,11 @@
 ### ⚙️结合loudflare部署免费节点项目与教程使用 [am-cf-tunnel](https://github.com/amclubs/am-cf-tunnel)
 - 本频道订阅器转换地址：https://sub.amclubss.com
 
+### 👉 后期计划
+- 增加GitHub部署
+- 增加Cloudflare部署(不建议,容易1101,但粉细要求)
+- 其它免费容器部署
+
 ## 📝一、前期准备资料
 <details>
 <summary>点击展开/收起</summary>
