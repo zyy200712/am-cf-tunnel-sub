@@ -72,7 +72,7 @@ let ghName = base64Decode('aHR0cHM6Ly9naXRodWIuY29tL2FtY2x1YnMvYW0tY2YtdHVubmVs'
 let bName = base64Decode('aHR0cHM6Ly9hbWNsdWJzcy5jb20=');
 let pName = '5pWw5a2X5aWX5Yip';
 let hostRemark = false;
-let enableLog = true;
+let enableLog = false;
 
 // ========== Vercel handler ==========
 export default async function handler(req, res) {
@@ -160,7 +160,8 @@ export default async function handler(req, res) {
         subConverter = subConverterWithoutProtocol;
 
         fakeUserId = await getFakeUserId(uuid);
-        fakeHostName = fakeUserId.slice(6, 9) + "." + fakeUserId.slice(13, 19);
+        const baseFakeHost = fakeUserId.slice(6, 9) + "." + fakeUserId.slice(13, 19);
+        fakeHostName = getFakeHostName(rawHost);
         log(`[handler]-->fakeUserId: ${fakeUserId}`);
 
         if (url.pathname === "/login") {
@@ -421,7 +422,7 @@ async function getchannelConfig(rawHost, userId, host, proxyIP, parsedSocks5, us
     if (protType && !randomNum) {
         num = num * 2;
     }
-    fakeHostName = getFakeHostName(rawHost);
+    
     const ipUrlTxtAndCsv = await getIpUrlTxtAndCsv(noTLS, ipUrlTxt, ipUrlCsv, num);
 
     log(`txt: ${ipUrlTxtAndCsv.txt} \n csv: ${ipUrlTxtAndCsv.csv}`);
