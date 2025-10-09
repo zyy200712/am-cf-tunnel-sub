@@ -1,12 +1,12 @@
 ### 🚀[am-cf-tunnel-sub](https://github.com/amclubs/am-cf-tunnel-sub)
 基于vercel 部署该脚本，你可以方便地将Cloudflare Workers 和 Pages的 VLESS、Trojan 配置信息使用在线配置转换到 Clash、 Singbox 、Quantumult X等工具中订阅使用。Cloudflare Workers 和 Pages 生成VLESS、Trojan节点,实现一键订阅节点。分离节点与订阅框架,更好解决Cloudfare部署时出现1101、522的问题。 [最新视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=596s)、[🎬 YouTube](https://youtube.com/@am_clubs?sub_confirmation=1)、 [💬 Telegram](https://t.me/am_clubs)、[📂 GitHub](https://github.com/amclubs)、[🌐 Blog](https://amclubss.com)
 
-### ⚙️结合loudflare部署免费节点项目与教程使用 [am-cf-tunnel](https://github.com/amclubs/am-cf-tunnel)
+### ⚙️结合Coudflare部署免费节点项目与教程使用 [am-cf-tunnel](https://github.com/amclubs/am-cf-tunnel)
 - 本频道订阅器转换地址：https://sub.amclubss.com
 
 ### 👉 后期计划
 - 增加GitHub部署
-- 增加Cloudflare部署(不建议,容易1101,但粉细要求)
+- 增加Cloudflare部署(不建议,容易1101,粉丝要求)
 - 其它免费容器部署
 
 ## 📝一、前期准备资料
