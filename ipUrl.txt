@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/amclubs/am-cf-tunnel/main/ipUS.txt
+https://raw.githubusercontent.com/zyy200712/am-cf-tunnel-sub/main/ipUS.txt
