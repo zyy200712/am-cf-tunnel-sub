@@ -1,7 +1,7 @@
 ### 🚀[am-cf-tunnel-sub](https://github.com/amclubs/am-cf-tunnel-sub)
 基于Vercel、Cloudflare部署该脚本，你可以方便地将Cloudflare Workers 和 Pages的 VLESS、Trojan 配置信息使用在线配置转换到 Clash、 Singbox 、Quantumult X等工具中订阅使用。Cloudflare Workers 和 Pages 生成VLESS、Trojan节点,实现一键订阅节点。分离节点与订阅框架,更好解决Cloudfare部署时出现1101、522的问题。 [最新视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=596s)、[🎬 YouTube](https://youtube.com/@am_clubs?sub_confirmation=1)、 [💬 Telegram](https://t.me/am_clubs)、[📂 GitHub](https://github.com/amclubs)、[🌐 Blog](https://amclubss.com)
 
-### ⚙️结合Coudflare部署免费节点项目 [am-cf-tunnel](https://github.com/amclubs/am-cf-tunnel) 与教程使用 [视频教程](https://youtu.be/i-XnnP-MptY)
+### ⚙️结合Coudflare部署免费节点项目 [am-cf-tunnel](https://github.com/amclubs/am-cf-tunnel) 与教程使用 [部署视频教程](https://youtu.be/i-XnnP-MptY)
 - 本频道订阅器转换地址：https://sub.amclubss.com
 
 ### 👉 后期计划
@@ -31,7 +31,7 @@
 </details>
 
 ##
-### ⚙️ 二、部署节点订阅器 [视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=596s)
+### ⚙️ 二、部署节点订阅器 [Vercel部署视频教程](https://www.youtube.com/playlist?list=PLGVQi7TjHKXZGODTvB8DEervrmHANQ1AR) [Cloudfare部署视频教程](https://youtu.be/f8ZTvv4u3Pw)
 
 <details>
 <summary>点击展开/收起</summary>
@@ -45,7 +45,7 @@
 
 访问 `http://部署域名` 即可。
 
-#### `②` Cloudfare方式部署（Pages GitHub）
+#### `②` Cloudfare方式部署（Pages GitHub）[视频教程](https://youtu.be/f8ZTvv4u3Pw)
 1. 部署 Cloudflare Pages：
    - 在 Github 上先 Fork 本项目[am-cf-tunnel-sub](https://github.com/amclubs/am-cf-tunnel-sub)，并点上 Star !!!
    - 在 CloudFlare主页的左边菜单的 `计算(Workers)` 选项卡 -> 点击 `Workers 和 Pages` -> 右上方点击 -> `创建应用程序` -> 选择 `Pages`里的 `导入现有 Git 存储库` 点击 `开始使用` -> 选择GitHub 点击`连接GitHub`根据提示授权GitHub和项目(此步已有可忽略)后 -> 选中 `am-cf-tunnel-sub`项目后 -> 点击 `开始设置` -> 可修改`项目名称`(此名称自己命名) 后 -> 右下方点击 `保存并部署`即可。
