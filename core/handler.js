@@ -68,7 +68,7 @@ let enableLog = false;
 
 // ======= 主逻辑函数（共用） =======
 export async function mainHandler({ req, url, headers, res, env }) {
-    const { ENABLE_LOG, ID, UUID, HOST, SOCKS5, IP_URL, PROXYIP, NAT64, NAT64_PREFIX, HOST_REMARK, PROT_TYPE, SUB_CONFIG, SUB_CONVERTER } = env || {};
+    const { ENABLE_LOG, ID, UUID, HOST, SOCKS5, IP_URL, PROXYIP, NAT64, NAT64_PREFIX, HOST_REMARK, PROT_TYPE, RANDOW_NUM, SUB_CONFIG, SUB_CONVERTER } = env || {};
 
     const rawHost = headers.get('host') || headers.get('Host') || 'localhost';
     const userAgent = headers.get('User-Agent') || '';
@@ -87,11 +87,9 @@ export async function mainHandler({ req, url, headers, res, env }) {
     const newCsvUrls = [], newTxtUrls = [];
     let ip_url = url.searchParams.get('IP_URL') || getEnvVar('IP_URL', env) || IP_URL;
     if (ip_url) {
-        ipUrl = await addIpText(ip_url);
-        ipUrl = await getIpUrlTxtToArry(ipUrl);
-        ipUrl.forEach(u => (getFileType(u) === 'csv' ? newCsvUrls.push(u) : newTxtUrls.push(u)));
-        ipUrlCsv = [...new Set(newCsvUrls)];
-        ipUrlTxt = [...new Set(newTxtUrls)];
+        const result = await parseIpUrl(ip_url);
+        ipUrlCsv = result.ipUrlCsvResult;
+        ipUrlTxt = result.ipUrlTxtResult;
     }
 
     const proxyIPUrl = url.searchParams.get('PROXYIP') || getEnvVar('PROXYIP', env) || PROXYIP;
@@ -134,6 +132,8 @@ export async function mainHandler({ req, url, headers, res, env }) {
     hostRemark = url.searchParams.get('HOST_REMARK') || getEnvVar('HOST_REMARK', env) || HOST_REMARK || hostRemark;
     let protType = url.searchParams.get('PROT_TYPE') || getEnvVar('PROT_TYPE', env) || PROT_TYPE;
     if (protType) protType = protType.toLowerCase();
+    randomNum = url.searchParams.get('RANDOW_NUM') || getEnvVar('RANDOW_NUM', env) || RANDOW_NUM || randomNum;
+    log(`[handler]-->randomNum: ${randomNum}`);
 
     subConfig = getEnvVar('SUB_CONFIG', env) || SUB_CONFIG || subConfig;
     subConverter = getEnvVar('SUB_CONVERTER', env) || SUB_CONVERTER || subConverter;
@@ -461,6 +461,40 @@ function xDe(b64, key) {
     return decoder.decode(out);
 }
 
+async function parseIpUrl(ip_url) {
+    const newCsvUrls = [];
+    const newTxtUrls = [];
+    try {
+        const response = await fetch(ip_url);
+        const text = await response.text();
+        const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+        const hasHttpLinks = lines.some(line => /^https?:\/\//i.test(line));
+        if (hasHttpLinks) {
+            lines.forEach(u => {
+                if (/^https?:\/\//i.test(u)) {
+                    if (getFileType(u) === 'csv') {
+                        newCsvUrls.push(u);
+                    } else {
+                        newTxtUrls.push(u);
+                    }
+                }
+            });
+        } else {
+            if (getFileType(ip_url) === 'csv') {
+                newCsvUrls.push(ip_url);
+            } else {
+                newTxtUrls.push(ip_url);
+            }
+        }
+        const ipUrlCsvResult = [...new Set(newCsvUrls)];
+        const ipUrlTxtResult = [...new Set(newTxtUrls)];
+        return { ipUrlCsvResult, ipUrlTxtResult };
+    } catch (err) {
+        errorLogs('获取 IP_URL 文件内容失败：', err);
+        return { ipUrlCsvResult: [], ipUrlTxtResult: [] };
+    }
+}
+
 /** ---------------------Get data------------------------------ */
 let subParams = ['sub', 'base64', 'b64', 'clash', 'singbox', 'sb'];
 let portSet_http = new Set([80, 8080, 8880, 2052, 2086, 2095, 2082]);
@@ -773,7 +807,7 @@ async function getIpUrlTxt(urlTxts, num) {
     log(`getIpUrlTxt-->ipTxt: ${ipTxt} \n `);
     let newIpTxt = await addIpText(ipTxt);
     const hasAcCom = urlTxts.includes(defaultIpUrlTxt);
-    if (hasAcCom || randomNum) {
+    if (hasAcCom && typeof randomNum === 'number' && randomNum !== 0) {
         newIpTxt = getRandomItems(newIpTxt, num);
     }
 
