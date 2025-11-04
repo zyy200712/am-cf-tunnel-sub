@@ -1044,6 +1044,19 @@ function getConfigHtml(host, remark, v2, clash) {
         <body>
             ${header}
             <pre>${output}</pre>
+            <div style="
+                margin: 20px auto;
+                max-width: 600px;
+                text-align: center;
+                background: linear-gradient(135deg, #ffcc70, #ff884d);
+                color: #222;
+                padding: 12px 16px;
+                border-radius: 8px;
+                font-weight: bold;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            ">
+                🚧 在线优先 IP 功能正在开发中，敬请期待 🚀
+            </div>
             <script>
                 function copyToClipboard(text) {
                 navigator.clipboard.writeText(text)
