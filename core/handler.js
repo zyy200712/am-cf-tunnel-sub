@@ -24,7 +24,6 @@ let ipLocal = [
 
 const defaultIpUrlTxt = base64Decode('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2FtY2x1YnMvYW0tY2YtdHVubmVsL21haW4vaXB2NC50eHQ=');
 let randomNum = 25;
-let ipUrl = [];
 let ipUrlTxt = [defaultIpUrlTxt];
 let ipUrlCsv = [];
 let noTLS = false;
@@ -62,7 +61,7 @@ let tgName = base64Decode('aHR0cHM6Ly90Lm1lL2FtX2NsdWJz');
 let ghName = base64Decode('aHR0cHM6Ly9naXRodWIuY29tL2FtY2x1YnMvYW0tY2YtdHVubmVs');
 let bName = base64Decode('aHR0cHM6Ly9hbWNsdWJzcy5jb20=');
 let pName = '5pWw5a2X5aWX5Yip';
-let hostRemark = false;
+let hostRemark;
 let enableLog = false;
 
 // ======= 主逻辑函数（共用） =======
@@ -665,7 +664,6 @@ function isSingboxCondition(userAgent, _url) {
 
 function splitNodeData(uniqueIpTxt, noTLS, host, uuid, userAgent, protType, nat64, hostRemark) {
     log(`splitNodeData----> \n host: ${host} \n uuid: ${uuid} \n protType: ${protType} \n hostRemark: ${hostRemark}`);
-    const isHostRemark = (hostRemark === true || hostRemark === 'true');
 
     const regionMap = {
         'SG': '🇸🇬 SG',
@@ -717,8 +715,8 @@ function splitNodeData(uniqueIpTxt, noTLS, host, uuid, userAgent, protType, nat6
             remarks = "";
         }
 
-        if (isHostRemark) {
-            remarks = host;
+        if (hostRemark) {
+            remarks = hostRemark;
         } else {
             remarks = (remarks && remarks.trim()) ? remarks.trim() : address;
         }
@@ -1380,11 +1378,9 @@ async function getSettingHtml(host) {
         </select>
 
         <label>HOST_REMARK</label>
-        <select id="HOST_REMARK" name="HOST_REMARK">
-            <option value="false">关闭</option>
-            <option value="true">启用</option>
-        </select>
-
+        <label>HOST_REMARK</label>
+        <input type="text" id="HOST_REMARK" name="HOST_REMARK" placeholder="可选：所有节点别名" />
+        
         <button type="button" class="save-btn" onclick="saveSettings()">💾 生成链接</button>
         </form>
     </div>
