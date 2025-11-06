@@ -82,7 +82,7 @@
 | SUB_CONFIG       | [https://raw.github.../ACL4SSR_Online_Mini.ini](https://raw.githubusercontent.com/amclubs/ACL4SSR/main/Clash/config/ACL4SSR_Online_Full_MultiMode.ini) |❌| clash、singbox等 订阅转换配置文件  ||
 | SUB_CONVERTER    | url.v1.mk                    |❌| clash、singbox等 订阅转换后端的api地址                               ||
 | PROT_TYPE        | 默认空          |❌|      默认空,就是生成vless和trojan节点，vless(只生成vless节点)，trojan(只生成trojan节点)           | [视频教程](https://www.youtube.com/watch?v=emEBm8Gw2wI&t=922s) |
-| HOST_REMARK           | true/false                            |❌ | 默认false,是否用订阅域名做节点别名                                      ||
+| HOST_REMARK           | 默认空                            |❌ | 默认是节点IP，所有节点别名                                      ||
 
 - 本频道订阅器转换地址：https://sub.amclubss.com
   
