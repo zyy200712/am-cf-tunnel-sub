@@ -38,7 +38,6 @@ let subConfig = base64Decode('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2FtY2
 let subConverter = base64Decode('dXJsLnYxLm1r');
 let subProtocol = 'https';
 
-let tagName = base64Decode('YW1jbHVicw==');
 let subUpdateTime = 6;
 let timestamp = 4102329600000;
 let total = 99 * 1125899906842624;
@@ -68,12 +67,13 @@ let enableLog = false;
 
 // ======= 主逻辑函数（共用） =======
 export async function mainHandler({ req, url, headers, res, env }) {
-    const { ENABLE_LOG, ID, UUID, HOST, SOCKS5, IP_URL, PROXYIP, NAT64, NAT64_PREFIX, HOST_REMARK, PROT_TYPE, RANDOW_NUM, SUB_CONFIG, SUB_CONVERTER } = env || {};
+    const { ENABLE_LOG, ID, UUID, HOST, SOCKS5, IP_URL, PROXYIP, NAT64, NAT64_PREFIX, HOST_REMARK, PROT_TYPE, RANDOW_NUM, SUB_CONFIG, SUB_CONVERTER,NO_TLS } = env || {};
 
     const rawHost = headers.get('host') || headers.get('Host') || 'localhost';
     const userAgent = headers.get('User-Agent') || '';
     log(`[mainHandler]-->rawHost: ${rawHost}`);
     enableLog = url.searchParams.get('ENABLE_LOG') || getEnvVar('ENABLE_LOG', env) || enableLog;
+    noTLS = url.searchParams.get('NO_TLS') || getEnvVar('NO_TLS', env) || noTLS;
 
     id = getEnvVar('ID', env) || ID || id;
     uuid = url.searchParams.get('UUID') || getEnvVar('UUID', env) || UUID;
@@ -84,7 +84,6 @@ export async function mainHandler({ req, url, headers, res, env }) {
     parsedSocks5 = await parseSocks5FromUrl(s5, url);
     if (parsedSocks5) socks5Enable = true;
 
-    const newCsvUrls = [], newTxtUrls = [];
     let ip_url = url.searchParams.get('IP_URL') || getEnvVar('IP_URL', env) || IP_URL;
     if (ip_url) {
         const result = await parseIpUrl(ip_url);
@@ -146,7 +145,7 @@ export async function mainHandler({ req, url, headers, res, env }) {
     subConverter = subConverterWithoutProtocol;
 
     fakeUserId = await getFakeUserId(uuid);
-    fakeHostName = getFakeHostName(rawHost);
+    fakeHostName = getFakeHostName(rawHost,noTLS);
     log(`[handler]-->fakeUserId: ${fakeUserId}`);
 
     // ---------------- 路由 ----------------
@@ -159,11 +158,11 @@ export async function mainHandler({ req, url, headers, res, env }) {
         return sendResponse(html, userAgent, res);
     }
     if (url.pathname === `/${id}`) {
-        const html = await getConfig(rawHost, uuid, host, paddr, parsedSocks5, userAgent, url, null, nat64, hostRemark);
+        const html = await getConfig(rawHost, uuid, host, paddr, parsedSocks5, userAgent, url, protType, nat64, hostRemark);
         return sendResponse(html, userAgent, res);
     }
     if (url.pathname === `/${fakeUserId}`) {
-        const html = await getConfig(rawHost, uuid, host, paddr, parsedSocks5, 'CF-FAKE-UA', url, null, nat64, hostRemark);
+        const html = await getConfig(rawHost, uuid, host, paddr, parsedSocks5, 'CF-FAKE-UA', url, protType, nat64, hostRemark);
         return sendResponse(html, 'CF-FAKE-UA', res);
     }
     return login(req, env, res);
@@ -412,7 +411,7 @@ async function getFakeUserId(userId) {
     return `${hashArray.substring(0, 8)}-${hashArray.substring(8, 12)}-${hashArray.substring(12, 16)}-${hashArray.substring(16, 20)}-${hashArray.substring(20, 32)}`;
 }
 
-function getFakeHostName(host) {
+function getFakeHostName(host,noTLS) {
     if (host.includes(".pages.dev")) {
         return `${fakeHostName}.pages.dev`;
     } else if (host.includes(".workers.dev") || host.includes("notls") || noTLS === 'true') {
@@ -606,19 +605,19 @@ async function getConfigContent(rawHost, userAgent, _url, host, fakeHostName, fa
     log(`------------getConfigContent------------------`);
     const uniqueIpTxt = [...new Set([...ipUrlTxt, ...ipUrlCsv])];
     let responseBody;
+    log(`[getConfigContent]---> protType: ${protType}`);
     if (!protType) {
         protType = doubleBase64Decode(protTypeBase64);
         const responseBody1 = splitNodeData(uniqueIpTxt, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
+        const responseBodyTop = splitNodeData(ipLocal, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
         protType = doubleBase64Decode(protTypeBase64Tro);
         const responseBody2 = splitNodeData(uniqueIpTxt, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
-        responseBody = [responseBody1, responseBody2].join('\n');
+        responseBody = [responseBodyTop,responseBody1, responseBody2].join('\n');
     } else {
-        responseBody = splitNodeData(uniqueIpTxt, noTLS, fakeHostName, fakeUserId, userAgent, doubleBase64Decode(protTypeBase64), nat64, hostRemark);
-        responseBody = [responseBody].join('\n');
+        const responseBodyTop = splitNodeData(ipLocal, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
+        responseBody = splitNodeData(uniqueIpTxt, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
+        responseBody = [responseBodyTop,responseBody].join('\n');
     }
-    protType = doubleBase64Decode(protTypeBase64);
-    const responseBodyTop = splitNodeData(ipLocal, noTLS, fakeHostName, fakeUserId, userAgent, protType, nat64, hostRemark);
-    responseBody = [responseBodyTop, responseBody].join('\n');
     responseBody = base64Encode(responseBody);
 
     if (!userAgent.includes(('CF-FAKE-UA').toLowerCase())) {
