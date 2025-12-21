@@ -82,7 +82,11 @@
 | SUB_CONFIG       | [https://raw.github.../ACL4SSR_Online_Mini.ini](https://raw.githubusercontent.com/amclubs/ACL4SSR/main/Clash/config/ACL4SSR_Online_Full_MultiMode.ini) |❌| clash、singbox等 订阅转换配置文件  ||
 | SUB_CONVERTER    | url.v1.mk                    |❌| clash、singbox等 订阅转换后端的api地址                               ||
 | PROT_TYPE        | 默认空          |❌|      默认空,就是生成vless和trojan节点，vless(只生成vless节点)，trojan(只生成trojan节点)           | [视频教程](https://www.youtube.com/watch?v=emEBm8Gw2wI&t=922s) |
-| HOST_REMARK           | 默认空                            |❌ | 默认是节点IP，所有节点别名                                      ||
+| NIP_HOST | 553558.xyz(默认) |❌| 优先IP时需要的nip服务 | |
+| CF_NAMESPACE_ID  | 37cf3x8xxx(Vercel方式部署才需求)     |❌ | 优先IP时需要CF的KV存桶ID（存储和数据库->Workers KV->创建的命名空间ID）        ||
+| CF_ACCOUNT_ID    | 0b0e49ba2xxxx(Vercel方式部署才需求)  |❌ | 优先IP时需要CF的帐号ID（计算和AI->Account Details->Account ID）         ||
+| CF_EMAIL         | xxx@gmail.com(Vercel方式部署才需求)  |❌ | 优先IP时需要CF的帐号邮箱        ||
+| CF_API_KEY       | 49ba2xxxx(Vercel方式部署才需求)      |❌ | 优先IP时需要CF的API令牌（管理帐户->帐户API令牌->创建的令牌D）          ||
 
 - 本频道订阅器转换地址：https://sub.amclubss.com
   
