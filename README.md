@@ -45,7 +45,7 @@
 访问 `http://部署域名` 即可。
 </details>
 
-#### `②` Cloudfare Workers 部署方法 [视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=165s)
+#### `②` Cloudfare Workers 部署方法 [视频教程](https://www.youtube.com/watch?v=D4XqeRNm2JI&t=501s)
 <details>
 <summary>点击展开/收起</summary>
 
@@ -72,7 +72,7 @@
 
 </details>
 
-#### `③` Cloudfare Pages 上传 部署方法 **(最佳推荐!!!)** [视频教程](https://www.youtube.com/watch?v=i-XnnP-MptY&t=1100s)
+#### `③` Cloudfare Pages 上传 部署方法 **(最佳推荐!!!)** [视频教程](https://www.youtube.com/watch?v=D4XqeRNm2JI&t=982s)
 <details>
 <summary>点击展开/收起</summary>
 
@@ -101,7 +101,7 @@
 
 </details>
 
-#### `④` Cloudfare Pages GitHub 部署方法 **(不推荐)** [视频教程](https://www.youtube.com/watch?v=dPH63nITA0M&t=654s)
+#### `④` Cloudfare Pages GitHub 部署方法 **(不推荐)** [视频教程](https://www.youtube.com/watch?v=f8ZTvv4u3Pw&t=137s)
 <details>
 <summary>点击展开/收起</summary>
    
