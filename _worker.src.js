@@ -70,21 +70,21 @@ let nipHost = base64Decode('bmlwLmxmcmVlLm9yZw==');
 let extraIp;
 let extraIpProxy;
 
-// export default {
-//     async fetch(request, env) {
-//         try {
-//             const url = new URL(request.url);
-//             const headers = request.headers;
-//             return await mainHandler({ req: request, url, headers, res: null, env });
-//         } catch (err) {
-//             errorLogs('Worker Error:', err);
-//             return new Response('Worker Error: ' + err.message, { status: 500 });
-//         }
-//     },
-// };
+export default {
+    async fetch(request, env) {
+        try {
+            const url = new URL(request.url);
+            const headers = request.headers;
+            return await mainHandler({ req: request, url, headers, res: null, env });
+        } catch (err) {
+            errorLogs('Worker Error:', err);
+            return new Response('Worker Error: ' + err.message, { status: 500 });
+        }
+    },
+};
 
 // ======= 主逻辑函数（共用） =======
-export async function mainHandler({ req, url, headers, res, env }) {
+async function mainHandler({ req, url, headers, res, env }) {
     const { ENABLE_LOG, ID, UUID, HOST, SOCKS5, IP_URL, PROXYIP, NAT64, NAT64_PREFIX, HOST_REMARK, PROT_TYPE, RANDOW_NUM, SUB_CONFIG, SUB_CONVERTER, NO_TLS, NIP_HOST, EXTRA_IP, EXTRA_IP_PROXY, ENABLE_OPEN } = env || {};
 
     const rawHost = headers.get('host') || headers.get('Host') || 'localhost';
